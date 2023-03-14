@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<table>
+    <tr style="color: indianred">
+        <th>id</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>email</th>
+    </tr>
+
+    <tr th:each="user : ${listUsers}">
+        <td th:utext="${user.id}"></td>
+        <td><a th:href="@{/{id}(id=${user.id})}"
+               th:utext="${user.firstName}"></a>
+        </td>
+        <td th:utext="${user.lastName}"></td>
+        <td th:utext="${user.email}"></td>
+        <td>
+            <form th:method="DELETE" th:action="@{/{id}(id=${user.id})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+        <td>
+            <form th:method="GET" th:action="@{/{id}/edit(id=${user.id})}">
+                <input type="submit" value="Update" />
+            </form>
+        </td>
+</table>
+<!--<table border="1" style="width: 300px">-->
+<!--    <tr style="font-weight: bold">-->
+<!--        <td>Id</td>-->
+<!--        <td>Name</td>-->
+<!--        <td>LastName</td>-->
+<!--        <td>Email</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="user : ${allUsers}">-->
+<!--        <td th:text="${user.id}">id</td>-->
+<!--        <td th:text="${user.firstName}">name</td>-->
+<!--        <td th:text="${user.lastName}">lastname</td>-->
+<!--        <td th:text="${user.email}">email</td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<form action="/new">
+    <button>New user</button>
+</form>
+
+</body>
+</html>
