@@ -3,9 +3,12 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.models.User;
 import web.service.UserService;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -18,7 +21,7 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/") //получаем всех людей из ДАО и передадим в views
+    @GetMapping("/")
     public String allUsers(Model model) {
         model.addAttribute("listUsers", userService.getListUsers());
         return "users/allusers";
@@ -34,8 +37,10 @@ public class UsersController {
     public String newUser(@ModelAttribute("user") User user) {
         return "users/new";
     }
+
     @PostMapping()
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "users/new";
         userService.add(user);
         return "redirect:/";
     }
@@ -47,7 +52,10 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users/edit";
+        }
         userService.updateUser(user);
         return "redirect:/";
     }

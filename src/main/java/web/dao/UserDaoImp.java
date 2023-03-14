@@ -14,7 +14,6 @@ public class UserDaoImp implements UserDao {
     @Override
     public void add(User user) {
         entityManager.persist(user);
-        entityManager.close();
     }
 
     public List<User> getListUsers() {
@@ -36,6 +35,6 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void updateUser(User user) {
-//        sessionFactory.getCurrentSession().update(user);
+        entityManager.merge(user);
     }
 }
