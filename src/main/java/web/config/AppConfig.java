@@ -46,7 +46,7 @@ public class AppConfig {
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setJpaVendorAdapter(vendorAdapter()); //??
+        factoryBean.setJpaVendorAdapter(vendorAdapter());
         factoryBean.setDataSource(getDataSource());
         factoryBean.setJpaProperties(props);
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);

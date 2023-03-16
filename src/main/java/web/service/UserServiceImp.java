@@ -24,7 +24,6 @@ public class UserServiceImp implements UserService {
         userDao.add(user);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<User> getListUsers() {
         return userDao.getListUsers();
@@ -36,7 +35,6 @@ public class UserServiceImp implements UserService {
         userDao.removeUserById(id);
     }
 
-    @Transactional
     @Override
     public User getUserById(long id) {
         return userDao.getUserById(id);

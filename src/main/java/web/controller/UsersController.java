@@ -27,7 +27,7 @@ public class UsersController {
         return "users/allusers";
     }
 
-    @GetMapping("/{id}") //получаем одного человека из ДАО по id
+    @GetMapping("/{id}")
     public String userById(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "users/userbyid";
